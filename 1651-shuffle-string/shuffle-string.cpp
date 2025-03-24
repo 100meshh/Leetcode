@@ -5,8 +5,7 @@ public:
         string final;
         for(int i=0;i<indices.size();i++)
         {
-            int p=indices[i];
-            ans[p]=s[i];
+            ans[indices[i]]=s[i];
         }
         for(int i=0;i<ans.size();i++)
         {
