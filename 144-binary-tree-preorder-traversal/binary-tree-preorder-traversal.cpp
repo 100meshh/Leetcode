@@ -11,15 +11,26 @@
  */
 class Solution {
 public:
-void preOr(vector<int>&ans,TreeNode* root){
-    if(root==NULL) return;
-    ans.push_back(root->val);
-    preOr(ans,root->left);
-    preOr(ans,root->right);
-}
     vector<int> preorderTraversal(TreeNode* root) {
+        // iterative approach
+
+        stack<TreeNode*>st;
+
         vector<int>ans;
-        preOr(ans,root);
+        if(!root)return ans;
+
+        st.push(root);
+
+        while(!st.empty()){
+
+            TreeNode* temp=st.top();
+            st.pop();
+
+            ans.push_back(temp->val);
+            
+            if(temp->right) st.push(temp->right);
+            if(temp->left) st.push(temp->left);
+        }
         return ans;
     }
 };
