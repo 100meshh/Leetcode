@@ -10,16 +10,40 @@
  * };
  */
 class Solution {
-    void inOr(vector<int>&ans,TreeNode* root){
-        if(root==NULL) return;
-        inOr(ans,root->left);
-        ans.push_back(root->val);
-        inOr(ans,root->right);
-    }
 public:
     vector<int> inorderTraversal(TreeNode* root) {
+        stack<TreeNode*>st;
+        stack<bool>st1;
         vector<int>ans;
-        inOr(ans,root);
+        if(!root) return ans;
+
+        st.push(root);
+        st1.push(0);
+
+        while(!st.empty()){
+            TreeNode* temp = st.top();
+            st.pop();
+
+            bool flag=st1.top();
+            st1.pop();
+
+            if(!flag){
+                if(temp->right) {
+                    st.push(temp->right);
+                    st1.push(0);
+                }
+                st.push(temp);
+                st1.push(1);
+
+                if(temp->left){
+                    st.push(temp->left);
+                    st1.push(0);
+                }
+            }
+            else{
+            ans.push_back(temp->val);
+            }
+        }
         return ans;
     }
 };
