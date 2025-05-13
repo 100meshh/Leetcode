@@ -10,16 +10,20 @@
  * };
  */
 class Solution {
-    void LRN(vector<int>&ans,TreeNode* root){
-        if(root==NULL) return;
-        LRN(ans,root->left);
-        LRN(ans,root->right);
-        ans.push_back(root->val);
-    }
 public:
     vector<int> postorderTraversal(TreeNode* root) {
+        stack<TreeNode*>st;
         vector<int>ans;
-        LRN(ans,root);
+        if(!root) return ans;
+        st.push(root);
+        while(!st.empty()){
+            TreeNode* temp=st.top();
+            st.pop();
+            ans.push_back(temp->val);
+            if(temp->left) st.push(temp->left);
+            if(temp->right) st.push(temp->right);
+        }
+        reverse(ans.begin(),ans.end());
         return ans;
     }
 };
