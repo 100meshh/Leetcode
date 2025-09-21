@@ -21,7 +21,7 @@ public:
     }
 
     int pathSum(TreeNode* root, int targetSum) {
-        if (!root) return 0;             // <-- crucial
+        if (!root) return 0;
         return helper(root, targetSum)+ pathSum(root->left, targetSum)+ pathSum(root->right, targetSum);
     }
 };
